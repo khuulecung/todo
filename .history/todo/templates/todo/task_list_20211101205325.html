@@ -1,0 +1,28 @@
+{% block content %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+    <body>
+        <table class="table" style="width:50%; margin:auto; margin-top:200px">
+            <thead>
+                <tr class="table-primary">
+                    <th class="table-primary" scope="col">Title</th>
+                    <th class="table-primary" scope="col">Description</th>
+                    <th class="table-primary" scope="col">Due Date</th>
+                    <th class="table-primary" scope="col">Created Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.created_date }}</td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+{% endblock %}

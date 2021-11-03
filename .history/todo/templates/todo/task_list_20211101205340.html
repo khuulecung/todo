@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <table class="table" style="width:50%; margin:auto; margin-top:200px">
+        <thead>
+            <tr class="table-primary">
+                <th class="table-primary" scope="col">Title</th>
+                <th class="table-primary" scope="col">Description</th>
+                <th class="table-primary" scope="col">Due Date</th>
+                <th class="table-primary" scope="col">Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.due_date }}</td>
+                <td>{{ task.created_date }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+{% endblock %}

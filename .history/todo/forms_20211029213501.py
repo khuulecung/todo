@@ -1,0 +1,7 @@
+from django import forms
+from . import models
+
+class CreateTaskForm(forms.ModelForm):
+    class Meta:
+        model = models.Task
+        
