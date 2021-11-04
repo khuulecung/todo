@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'todo',
     'crispy_forms',
     "crispy_tailwind",
-    "bootstrap4",
-    'bootstrap_datepicker_plus',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
@@ -133,3 +131,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL = "todo/"
+
+LOGIN_URL = "/login"
