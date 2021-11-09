@@ -53,4 +53,4 @@ class SignUpView(CreateView):
     template_name = 'registration/signup.html'
 
     def get_success_url(self):
-        return reverse("login/")
+        return reverse("todo:task-list")

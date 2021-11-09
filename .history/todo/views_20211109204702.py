@@ -49,8 +49,4 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("todo:task-list")
 
 class SignUpView(CreateView):
-    form_class = UserCreationForm
-    template_name = 'registration/signup.html'
-
-    def get_success_url(self):
-        return reverse("login/")
+    template_name = 'reg/signup.html'
