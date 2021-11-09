@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+{% block content %}
+<form method="post">
+    <div>
+    </
+    {% csrf_token %}
+    {{ form|crispy }}
+    <h1 class="mt-5 text-3xl text-gray-800">Are you sure you want to delete "{{ object }}"?</h1>
+    <input type="submit" value="Confirm">
+</form>
+{% endblock content %}

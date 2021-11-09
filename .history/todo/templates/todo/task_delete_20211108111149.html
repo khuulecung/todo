@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load tailwind_filters %}
+{% block content %}
+
+<div class="m-auto">
+
+    <div>
+        <a class="hover:text-blue-500" href="{% url 'todo:task-list' %}">Go back to task list</a>
+    </div>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <h1 class="mt-5 text-3xl text-gray-800">Are you sure you want to delete "{{ object }}"?</h1>
+    <input type="submit" value="Confirm">
+</form>
+</div>
+{% endblock content %}
