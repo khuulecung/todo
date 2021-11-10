@@ -4,10 +4,13 @@ from django.shortcuts import redirect, render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin 
-from .forms import CreateTaskForm
+from .forms import CreateTaskForm, SignUpForm
 from .models import Task
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your views here.
 class TaskCreateView(LoginRequiredMixin, CreateView):
@@ -32,6 +35,15 @@ class TaskListView(LoginRequiredMixin, ListView):
     context_object_name = "tasks"
     login_url = '/login/'
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_organizor:
+            queryset = Task.objects.filter(organization=user.userprofile)
+        if user.is_member:
+            queryset = Task.objects.filter(organization=user.member.organization)
+            queryset = Task.objects.filter(member__user=user)
+        return super().get_queryset()
+
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'todo/task_update.html'
@@ -49,8 +61,8 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
         return reverse("todo:task-list")
 
 class SignUpView(CreateView):
-    form_class = UserCreationForm
+    form_class = SignUpForm
     template_name = 'registration/signup.html'
 
     def get_success_url(self):
-        return reverse("login/")
+        return reverse("login")
