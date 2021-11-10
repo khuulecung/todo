@@ -38,9 +38,9 @@ class TaskListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         user = self.request.user
         if user.is_organizor:
-            queryset = Task.objects.filter(organization=user.userprofile)
+            queryset = Task.objects.filter(organization=user.userprofile, member__isnull=False)
         if user.is_member:
-            queryset = Task.objects.filter(organization=user.member.organization)
+            queryset = Task.objects.filter(organization=user.member.organization, member__isnull=False)
             queryset = Task.objects.filter(member__user=user)
         return super().get_queryset()
 

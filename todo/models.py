@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    is_organizor = models.BooleanField(default=True)
-    is_member = models.BooleanField(default=False)
+    is_organizor = models.BooleanField(default=False)
+    is_member = models.BooleanField(default=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,6 +20,7 @@ class Task(models.Model):
     due_date = models.DateField(blank=True, null=True)
     organization = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     complete = models.BooleanField(blank=True, null=True)
+    member = models.ForeignKey("Member", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -34,5 +35,6 @@ class Member(models.Model):
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
+        Member.objects.create(user=instance, organization=instance.userprofile)
 
 post_save.connect(post_user_created_signal, sender=User)
